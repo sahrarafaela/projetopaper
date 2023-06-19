@@ -2,23 +2,23 @@
 
 require_once('database.php');
 
-$search_criteria = $_POST['search_criteria'];
+$search = $_POST['search_criteria'];
 
 $query = "SELECT id, firt_name, last_name, emails, birthdate FROM 
-bbiblioteca_php WHERE firt_name LIKE '%" .$search_criteria."%' OR last_name LIKE '%" .$search_criteria."%'";
+bbiblioteca_php WHERE firt_name LIKE '%" .$search."%' OR last_name LIKE '%" .$search."%'";
 
-$authors = [];
+$receive = [];
 $errors = ['data' => false];
 
 
-$getAuthors = $db->query($query);
+$getReceive = $db->query($query);
 
-if($getAuthors -> num_rows > 0){
-    while($data = $getAuthors-> fetch_assoc()){
-        $authors[] = $data;
+if($getReceive -> num_rows > 0){
+    while($data = $getReceive-> fetch_assoc()){
+        $receive[] = $data;
     }
 
-    echo json_encode($authors);
+    echo json_encode($receive);
 }else{
     echo json_encode($errors);
 }
